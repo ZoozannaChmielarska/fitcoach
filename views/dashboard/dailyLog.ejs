@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row py-md-5 text-center justify-content-center">
+                <div class="col-md-12 col-lg-7 mb-6 mb-md-0">
+                    <h1 class="display-2 mb-4 position-relative">
+                        Dziennik
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+        <div class="mb-6 mb-md-0 py-md-5">
+        <form action="/dashboard/dailyLog" method="POST">
+            <div class="row mb-2">
+                <div class="col-5">
+                    <label for="weight" class="col-form-label main-color"> Waga </label>
+                </div>
+                <div class="col-7">
+                    <input type="text" id="weight" name="weight" class="form-control">
+                </div>
+            </div>
+            
+            <div class="row mb-2">
+                <div class="col-5">
+                    <label for="calIntake" class="col-form-label main-color"> Dzienne spożycie kalorii </label>
+                </div>
+                <div class="col-7">
+                    <input type="number" id="calIntake" name="calIntake" class="form-control">
+                </div>
+            </div>
+            
+            <input type="submit" class="btn btn-outline-secondary me-2 mt-3 w-100" value="Dodaj obserwację">
+        </form>
+        </div>
+        </div>
+    </div>
+    </div>

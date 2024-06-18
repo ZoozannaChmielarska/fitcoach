@@ -1,0 +1,41 @@
+<nav class="navbar bg-body-tertiary secondary-color-2-bg mb-3">
+    <div class="container-fluid">
+    <a class="navbar-brand title abril main-color" href="/dashboard">
+        <i class="fa-solid fa-stopwatch-20 mx-2"></i>
+        FitCoach
+    </a>
+    <div class="d-flex">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary me-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%- locals.user.username %>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" href="/dashboard">
+                    <i class="fa-solid fa-chart-line me-2"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="/dashboard/dailyLog">
+                    <i class="fa-solid fa-calendar-plus me-2"></i>
+                    Dziennik
+                </a>
+            <li>
+                <a class="dropdown-item" href="/dashboard/profile">
+                    <i class="fa-solid fa-user me-2"></i>
+                    Profil
+                </a>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="/logout">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    Wyloguj się
+                </a>
+            </li>
+            </ul>
+          </div>
+
+    </div>
+    </div>
+</nav>

@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row py-md-5 text-center justify-content-center">
+      <div class="col-md-12 col-lg-6 mb-6 mb-md-0">
+          <h1 class="display-2 mb-0 position-relative">
+              Rejestracja
+          </h1>
+          <p class="fs-4 mb-4 main-color">
+            Masz już konto? <a href="/login" class="text-link"> Zaloguj się! </a>
+          </p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-6 mb-6 mb-md-0">
+        <form action="/signup" method="POST">
+          <div class="mb-3">
+              <label for="username" class="form-label main-color">Nazwa użytkownika</label>
+              <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+          </div>
+      
+          <div class="mb-3">
+              <label for="password" class="form-label main-color">Hasło</label>
+              <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+          </div>
+                  
+          <button type="submit" class="btn btn-outline-secondary me-2 mt-3 w-100">Zarejestruj się</button>
+        </form>
+      </div>
+     </div>
+  </div>

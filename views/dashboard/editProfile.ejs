@@ -1,0 +1,117 @@
+<div class="container">
+<div class="row">
+    <div class="col">
+        <div class="row py-md-5 text-center justify-content-center">
+            <div class="col-md-12 col-lg-6 mb-6 mb-md-0">
+                <h1 class="display-2 mb-4 position-relative">
+                    Edytuj profil
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+    <div class="mb-6 mb-md-0 py-md-5">
+    <form action="/dashboard/editProfile" method="POST">
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="username" class="col-form-label main-color"> Nazwa użytkownika </label>
+            </div>
+            <div class="col-7">
+                <input type="text" id="username" name="username" value="<%= locals.user.username %>" class="form-control">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="weight" class="col-form-label main-color"> Waga </label>
+            </div>
+            <div class="col-7">
+                <input type="text" id="weight" name="weight" value="<%= locals.user.weight %>" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="height" class="col-form-label main-color"> Wzrost </label>
+            </div>
+            <div class="col-7">
+                <input type="number" id="height" name="height" value="<%= locals.user.height %>" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="age" class="col-form-label main-color"> Wiek </label>
+            </div>
+            <div class="col-7">
+                <input type="number" id="age" name="age" value="<%= locals.user.age %>" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="sex" class="col-form-label main-color"> Płeć </label>
+            </div>
+            <div class="col-7">
+                <select id="sex" name="sex" class="form-control">
+                    <option value="male" <%= locals.user.sex === 'male' ? 'selected' : '' %>>Mężczyzna</option>
+                    <option value="female" <%= locals.user.sex === 'female' ? 'selected' : '' %>>Kobieta</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="calorieIntake" class="col-form-label main-color"> Dzienne spożycie kalorii </label>
+            </div>
+            <div class="col-7">
+                <input type="number" id="calorieIntake" name="calorieIntake" value="<%= locals.user.calorieIntake %>" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="activityLevel" class="col-form-label main-color"> Poziom aktywności </label>
+            </div>
+            <div class="col-7">
+                <select id="activityLevel" name="activityLevel" class="form-control">
+                    <option value="sedentary" <%= locals.user.activityLevel === 'sedentary' ? 'selected' : '' %>>Siedzący (Mało lub brak aktywności fizycznej)</option>
+                    <option value="lightlyActive" <%= locals.user.activityLevel === 'lightlyActive' ? 'selected' : '' %>>Lekko aktywny (Lekkie ćwiczenia/sport 3-5 razy w tygodniu)</option>
+                    <option value="moderatelyActive" <%= locals.user.activityLevel === 'moderatelyActive' ? 'selected' : '' %>>Średnio aktywny (Średnie ćwiczenia/sport 3-5 razy w tygodniu)</option>
+                    <option value="veryActive" <%= locals.user.activityLevel === 'veryActive' ? 'selected' : '' %>>Bardzo aktywny (Intensywne ćwiczenia/sport 6-7 razy w tygodniu)</option>
+                    <option value="extraActive" <%= locals.user.activityLevel === 'extraActive' ? 'selected' : '' %>>Bardzo aktywny (Intensywne ćwiczenia/sport 6-7 razy w tygodniu, plus praca fizyczna)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5">
+                <label for="goal" class="col-form-label main-color"> Cel </label>
+            </div>
+            <div class="col-7">
+                <select id="goal" name="goal" class="form-control">
+                    <option value="maintain" <%= locals.user.goal === 'maintain' ? 'selected' : '' %>>Utrzymać wagę</option>
+                    <option value="lose" <%= locals.user.goal === 'lose' ? 'selected' : '' %>>Schudnąć</option>
+                    <option value="gain" <%= locals.user.goal === 'gain' ? 'selected' : '' %>>Przytyć</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-outline-secondary me-2 mt-3 w-100">
+                Zapisz zmiany
+            </button>
+        </div>
+    </form>
+    <br><br>
+    <form action="/dashboard/deleteAccount" method="POST">
+        <button type="submit" class="btn btn-outline-secondary me-2 mt-3 w-100"> Usuń konto </button>
+    </form>
+    </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,163 @@
+<div class="container">
+    <h1 class="mb-3">
+        Dashboard
+    </h1>
+    <div class="container text-center">
+        <div class="row g-3 d-flex align-items-stretch">
+
+          <div class="col-lg-4 col-md-12 d-flex">
+            <div class="card card-dashboard flex-fill">
+                <div class="card-body">
+                  <h1> Wskaźnik BMI </h1>
+                  <% if (locals.bmi === 'Podaj swoją wagę oraz wzrost') { %>
+                    <a href="/dashboard/editProfile" class="text-link-inv"> <%= locals.bmi %> </a>
+                  <% } else { %>
+                    <span class="poppins-regular fs-3"> <%= locals.bmi %> </span>
+                    <p> <%= locals.bmiCategory %> </p>
+                <% } %>
+                </div>
+              </div>  
+          </div>
+
+          <div class="col-lg-4 col-md-12 d-flex">
+            <div class="card card-dashboard flex-fill">
+                <div class="card-body">
+                    <h1> Podstawowa przemiana materii </h1>
+                    <% if (locals.bmr === 'Podaj swoją wagę, wzrost i wiek') { %>
+                        <a href="/dashboard/editProfile" class="text-link-inv"> <%= locals.bmr %> </a>
+                    <% } else { %>
+                        <span class="poppins-regular fs-3"> <%= locals.bmr %> kcal </span>
+                    <% } %>
+                </div>
+            </div>  
+        </div>
+
+        <div class="col-lg-4 col-md-12 d-flex">
+          <div class="card card-dashboard flex-fill">
+              <div class="card-body">
+                  <h1> Zapotrzebowanie kaloryczne </h1>
+                  <% if (locals.tdee === 'Podaj swoją wagę, wzrost, wiek, płeć, poziom aktywności oraz cel') { %>
+                      <a href="/dashboard/editProfile" class="text-link-inv"> <%= locals.tdee %> </a>
+                  <% } else { %>
+                      <span class="poppins-regular fs-3"> <%= locals.tdee %> kcal </span>
+                  <% } %>
+              </div>
+          </div>  
+      </div>
+
+          <div class="col-12">
+            <div class="card card-dashboard">
+              <div class="card-body">
+                <canvas id="weightChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex">
+            <div class="card card-dashboard flex-fill">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table secondary-color">
+                    <thead>
+                      <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Spożyte kalorie</th>
+                        <th scope="col">Waga</th>
+                        <th scope="col">Przewidywana waga</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% 
+                      locals.dailyLogs.forEach((log, index) => { 
+                          var date = new Date(log.date);
+                          var formattedDate = date.getDate().toString().padStart(2, '0') + '/' + (date.getMonth() + 1).toString().padStart(2, '0') + '/' + date.getFullYear();
+                      %>
+                          <tr>
+                              <td><%= formattedDate %></td>
+                              <td><%= log.calorieIntake %></td>
+                              <td><%= log.weight %></td>
+                              <% if (locals.estimatedWeights[index]) { %>
+                                  <td><%= locals.estimatedWeights[index].toFixed(2) %></td>
+                              <% } else { %>
+                                  <td>N/A</td>
+                              <% } %>
+                          </tr>
+                      <% }) %>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</div>
+
+<!-- chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const dailyLogs = <%- JSON.stringify(locals.dailyLogs) %>;
+  const userWeight = <%- JSON.stringify(locals.user.weight) %>;
+  const estimatedWeights = <%- JSON.stringify(locals.estimatedWeights) %>;
+
+  const labels = dailyLogs.map(log => {
+    const date = new Date(log.date);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  });
+  const data = dailyLogs.map(log => log.weight);
+
+  const labels2 = dailyLogs.map(log => new Date(log.date).toLocaleDateString());
+  const data2 = estimatedWeights;
+
+  let chart;
+
+  function createChart(){
+    const ctx = document.getElementById('weightChart').getContext('2d');
+    labels.reverse();
+    data.reverse();
+    data2.reverse();
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Waga [kg]',
+          data: data,
+          fill: false,
+          borderColor: '#3e95cd',
+          backgroundColor: '#3e95cd',
+          tension: 0
+        },
+        {
+          label: 'Przewidywana waga [kg]',
+          data: data2,
+          fill: false,
+          borderColor: '#a53860',
+          backgroundColor: '#a53860',
+          tension: 0
+        }]
+      },
+      options: {
+        scales: {
+            y: {
+              min: Math.min(...data, ...data2) - 1,
+              max: Math.max(...data, ...data2) + 1
+          }
+        }
+    }
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    if (chart) {
+      chart.resize();
+    }
+  });
+
+  createChart();
+
+</script>
